@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AuthPage from "./pages/AuthPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 function App() {
+  const [url, setUrl] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <ToastContainer theme="colored" />
+      <Router>
+        <Routes>
+          <Route path="/" element={<AuthPage setUrl={setUrl} url={url} />} />
+          <Route
+            path="/resetPassword"
+            element={<ResetPasswordPage url={url} setUrl={setUrl} />}
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
